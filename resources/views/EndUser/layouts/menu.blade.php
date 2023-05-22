@@ -13,7 +13,7 @@
                     <div class="menu-section">
                         <h2 class="menu-section-title">{{ $category->name }}</h2>
                         <hr>
-                        @foreach ($products as $product)
+                        @foreach ($category->products as $product)
                             @continue($category->id != $product->category_id)
                             <div class="menu-item">
                                 <div class="menu-item-name"> {{ $product->name }} </div>

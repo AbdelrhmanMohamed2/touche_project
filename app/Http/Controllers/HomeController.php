@@ -17,8 +17,8 @@ class HomeController extends Controller
     {
         $chefs = Chef::get();
         $categories = Category::get();
-        $products = Product::get();
-        return view('EndUser.index', compact('chefs', 'categories', 'products'));
+        // $products = Product::get();
+        return view('EndUser.index', compact('chefs', 'categories'));
     }
 
     public function chefs()
@@ -54,6 +54,4 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'Message Send Successfully');
     }
-
-
 }
