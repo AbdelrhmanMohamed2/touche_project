@@ -16,7 +16,9 @@ class HomeController extends Controller
     public function index()
     {
         $chefs = Chef::get();
-        $categories = Category::get();
+        // $categories = Category::get();
+        $categories = Category::withCount('products')->orderBy('products_count', 'DESC')->get();
+
         // $products = Product::get();
         return view('EndUser.index', compact('chefs', 'categories'));
     }
@@ -34,9 +36,11 @@ class HomeController extends Controller
 
     public function menu()
     {
-        $categories = Category::get();
-        $products = Product::get();
-        return view('EndUser.pages.menu', compact('categories', 'products'));
+        $categories = Category::withCount('products')->orderBy('products_count', 'DESC')->get();
+
+        // dd($categories);
+        // $products = Product::get();
+        return view('EndUser.pages.menu', compact('categories'));
     }
 
     public function gallery()

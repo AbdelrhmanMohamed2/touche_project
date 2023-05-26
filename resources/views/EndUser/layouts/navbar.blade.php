@@ -11,11 +11,18 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{route('home.index')}}" class="page-scroll">Home</a></li>
-                <li><a href="{{route('home.menu')}}" class="page-scroll">Menu</a></li>
-                <li><a href="{{route('home.gallery')}}" class="page-scroll">Gallery</a></li>
-                <li><a href="{{route('home.chefs')}}" class="page-scroll">Chefs</a></li>
-                <li><a href="{{route('home.contact')}}" class="page-scroll">Contact</a></li>
+                <li><a href="{{ route('home.index') }}" class="page-scroll">Home</a></li>
+                <li><a href="{{ route('home.menu') }}" class="page-scroll">Menu</a></li>
+                <li><a href="{{ route('home.gallery') }}" class="page-scroll">Gallery</a></li>
+                <li><a href="{{ route('home.chefs') }}" class="page-scroll">Chefs</a></li>
+                <li><a href="{{ route('home.contact') }}" class="page-scroll">Contact</a></li>
+
+                @auth
+                    @if (auth()->user()->role == 'admin')
+                        <li><a href="{{ route('admin.index') }}" class="page-scroll">Admin panel</a></li>
+                    @endif
+                @endauth
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->

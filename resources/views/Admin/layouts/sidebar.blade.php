@@ -15,7 +15,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Admin Name</a>
+                <a href="#" class="d-block">{{auth()->user()->name}}</a>
             </div>
         </div>
 
@@ -120,13 +120,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href=""></i>
+                            <a href="{{route('admin.users.create')}}" class="nav-link"></i>
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>Create New User</p>
                             </a>
                         </li>
 
+
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('admin.users.all')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>All Users</p>
                             </a>

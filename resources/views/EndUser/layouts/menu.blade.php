@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             @foreach ($categories as $category)
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-12">
                     <div class="menu-section">
                         <h2 class="menu-section-title">{{ $category->name }}</h2>
                         <hr>
