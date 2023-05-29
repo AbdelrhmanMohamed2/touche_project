@@ -43,9 +43,11 @@ class HomeController extends Controller
         return view('EndUser.pages.menu', compact('categories'));
     }
 
-    public function gallery()
+    public function gallery($id = null)
     {
-        return view('EndUser.pages.gallery');
+        $categories = Category::with('products')->get();
+
+        return view('EndUser.pages.gallery', compact('categories'));
     }
 
     public function message(StoreHomeRequest $request)

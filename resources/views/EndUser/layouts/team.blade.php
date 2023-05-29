@@ -4,7 +4,7 @@
             <div class="col-md-10 col-md-offset-1 section-title">
                 <h2>Meet Our Chefs</h2>
                 <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed dapibus leonec.</p>
+                <p>{{ $settings[4]->value}}</p>
             </div>
             <div id="row">
                 @foreach ($chefs as $chef)

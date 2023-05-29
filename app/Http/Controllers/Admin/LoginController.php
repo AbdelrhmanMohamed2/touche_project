@@ -19,6 +19,7 @@ class LoginController extends Controller
         if (auth()->attempt($credentials) && auth()->user()->role == 'admin') {
             return redirect()->route('admin.index');
         } else {
+            $this->logout();
             return redirect()->back()->withErrors(['login' => 'Invalid credentials']);
         }
     }
@@ -26,6 +27,6 @@ class LoginController extends Controller
     public function logout()
     {
         auth()->logout();
-        return redirect()->route('admin.login');
+        return redirect()->back();
     }
 }

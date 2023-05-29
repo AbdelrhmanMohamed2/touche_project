@@ -3,7 +3,7 @@
         <div class="section-title text-center">
             <h2>Contact Form</h2>
             <hr>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed.</p>
+            <p>{{ $settings[6]->value }}</p>
         </div>
         <div class="col-md-10 col-md-offset-1">
             <form   method="POST" action="{{route('home.message')}}">
@@ -11,14 +11,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" id="name" class="form-control" placeholder="Name" name="name"
+                            <input type="text" id="name" class="form-control" placeholder="Name" name="name" value="@auth{{ auth()->user()->name }}@endauth"
                                 required="required">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="email" id="email" class="form-control" placeholder="Email" name="email"
+                            <input type="email" id="email" class="form-control" placeholder="Email" name="email" value="@auth{{ auth()->user()->email }}@endauth"
                                 required="required">
                             <p class="help-block text-danger"></p>
                         </div>

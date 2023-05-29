@@ -3,15 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 // use App\Http\Controllers\UserController;
-use App\Http\Controllers\SettingController;
+// use App\Http\Controllers\SettingController;
 // use App\Http\Controllers\ChefController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\UserController;
 // use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\UserLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,8 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 
 Route::get('admin/login', [LoginController::class, 'loginPage'])->name('admin.login')->middleware('guest');
 Route::post('admin/loginForm', [LoginController::class, 'login'])->name('admin.loggingForm');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
 
 Route::prefix('admin')->middleware(['auth', 'IsAdmin'])->group(function () {
 
@@ -45,14 +49,13 @@ Route::prefix('admin')->middleware(['auth', 'IsAdmin'])->group(function () {
         Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
 
             Route::get('/', 'index')->name('index');
+            Route::get('/edit/{setting}', 'edit')->name('edit');
+            Route::put('/update/{setting}', 'update')->name('update');
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
-            Route::post('/update/{user}', 'update')->name('update');
-            Route::get('/edit/{user}', 'edit')->name('edit');
             Route::delete('/delete/{user}', 'destroy')->name('destroy');
         });
 
-        Route::post('login', [LoginController::class, 'logout'])->name('logout');
 
         Route::get('/', [AdminDashboardController::class, 'index'])->name('index');
         Route::get('/messages', [AdminDashboardController::class, 'showMessages'])->name('messages.index');
@@ -65,12 +68,20 @@ Route::prefix('admin')->middleware(['auth', 'IsAdmin'])->group(function () {
 });
 
 
-Route::controller(HomeController::class)->name('home.')->group(function () {
+Route::controller(HomeController::class)->middleware('settings')->name('home.')->group(function () {
 
     Route::get('/', 'index')->name('index');
     Route::get('/chefs', 'chefs')->name('chefs');
     Route::get('/menu', 'menu')->name('menu');
-    Route::get('/gallery', 'gallery')->name('gallery');
+    Route::get('/gallery/{id?}', 'gallery')->name('gallery');
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/contact/send', 'message')->name('message');
+});
+
+
+Route::controller(UserLoginController::class)->name('users.')->prefix('users')->group(function(){
+    Route::get('login', 'index')->name('login.page')->middleware('guest');
+    Route::post('login', 'login')->name('login');
+    Route::get('register', 'create')->name('register.page');
+    Route::post('register/store', 'store')->name('register.store');
 });

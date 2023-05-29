@@ -9,13 +9,9 @@
                 <div class="about-text">
                     <h2>Our Restaurant</h2>
                     <hr>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare
-                        diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec
-                        ornare diam commodo nibh.</p>
+                    <p>{{ $settings[0]->value }}</p>
                     <h3>Awarded Chefs</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare
-                        diam. Sed commodo nibh ante facilisis bibendum dolor feugiat at. Duis sed dapibus leo nec
-                        ornare.</p>
+                    <p>{{ $settings[1]->value }}</p>
                 </div>
             </div>
         </div>

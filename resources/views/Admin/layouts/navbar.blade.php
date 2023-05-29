@@ -15,7 +15,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <form action="{{route('admin.logout')}}" method="post">
+        <form action="{{route('logout')}}" method="post">
             @csrf
             <input type="submit" class="btn-sm btn-danger" value="Logout">
         </form>

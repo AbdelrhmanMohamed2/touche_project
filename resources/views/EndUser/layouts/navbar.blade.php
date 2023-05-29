@@ -21,7 +21,18 @@
                     @if (auth()->user()->role == 'admin')
                         <li><a href="{{ route('admin.index') }}" class="page-scroll">Admin panel</a></li>
                     @endif
+                    <li>
+
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                            <input type="submit" class="btn btn-link" value="Logout">
+                        </form>
+                    </li>
                 @endauth
+                @guest
+                    <li><a href="{{ route('users.login.page') }}" class="page-scroll">Login</a></li>
+
+                @endguest
 
             </ul>
         </div>

@@ -2,14 +2,14 @@
 
 
 @section('title')
-    | Chefs
+    | Settings
 @endsection
 
 @section('css')
 @endsection
 
 @section('page_name')
-    Chefs
+    Settings
 @endsection
 
 @section('page_header')

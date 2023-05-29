@@ -3,7 +3,7 @@
         <div class="overlay">
             <h2>Gallery</h2>
             <hr>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed.</p>
+            <p>{{ $settings[3]->value }}</p>
         </div>
     </div>
     <div class="container">
@@ -12,10 +12,13 @@
                 <ul class="cat">
                     <li>
                         <ol class="type">
-                            <li><a href="#" data-filter="*" class="active">All</a></li>
-                            <li><a href="#" data-filter=".breakfast">Breakfast</a></li>
-                            <li><a href="#" data-filter=".lunch">Lunch</a></li>
-                            <li><a href="#" data-filter=".dinner">Dinner</a></li>
+                            <li><a href="{{ route('home.gallery') }}"
+                                    class="{{ request()->route('id') ?? 'active' }}">All</a></li>
+                            @foreach ($categories as $category)
+                                <li><a class="{{ request()->route('id') == $category->id ? 'active' : '' }}"
+                                        href="{{ route('home.gallery', $category->id) }}">{{ $category->name }}</a></li>
+                            @endforeach
+
                         </ol>
                     </li>
                 </ul>
@@ -24,174 +27,47 @@
         </div>
         <div class="row">
             <div class="portfolio-items">
-                <div class="col-sm-6 col-md-4 col-lg-4 breakfast">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/01-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
+
+                @foreach ($categories as $category)
+                    @if (request()->route('id') && request()->route('id') == $category->id)
+                        @foreach ($category->products as $product)
+                            <div class="col-sm-6 col-md-4 col-lg-4 breakfast">
+                                <div class="portfolio-item">
+                                    <div class="hover-bg">
+                                        {{-- < href="{{ asset('uploads/products/' .  $product->image ) }}" title="{{ $product->name}}"
+                                            data-lightbox-gallery="gallery1"> --}}
+                                        <div class="hover-text">
+                                            <h4>{{ $product->name }}</h4>
+                                        </div>
+                                        <img src="{{ asset('uploads/products/' . $product->image) }}"
+                                            class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
+                                        {{-- </a> --}}
+                                    </div>
                                 </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/01-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 dinner">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/02-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
+                            </div>
+                        @endforeach
+                    @elseif(!request()->route('id'))
+                        @foreach ($category->products as $product)
+                            <div class="col-sm-6 col-md-4 col-lg-4 breakfast">
+                                <div class="portfolio-item">
+                                    <div class="hover-bg">
+                                        {{-- <a href="{{ asset('uploads/products/' .  $product->image ) }}" title="{{ $product->name}}"
+                                            data-lightbox-gallery="gallery1"> --}}
+                                        <div class="hover-text">
+                                            <h4>{{ $product->name }}</h4>
+                                        </div>
+                                        <img src="{{ asset('uploads/products/' . $product->image) }}"
+                                            class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
+                                        {{-- </a> --}}
+                                    </div>
                                 </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/02-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 breakfast">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/03-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/03-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 breakfast">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/04-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/04-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 dinner">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/05-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/05-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 lunch">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/06-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/06-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 lunch">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/07-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/07-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 breakfast">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/08-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/08-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 dinner">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/09-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/09-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 lunch">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/10-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/10-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 lunch">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/11-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/11-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-4 breakfast">
-                    <div class="portfolio-item">
-                        <div class="hover-bg">
-                            <a href="{{ asset('EndUser') }}/img/portfolio/12-large.jpg" title="Dish Name"
-                                data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4>Dish Name</h4>
-                                </div>
-                                <img src="{{ asset('EndUser') }}/img/portfolio/12-small.jpg"
-                                    class="{{ asset('EndUser') }}/img-responsive" alt="Project Title">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
+
+
+
             </div>
         </div>
     </div>

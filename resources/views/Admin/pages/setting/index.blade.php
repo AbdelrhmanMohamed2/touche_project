@@ -32,14 +32,25 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach ($settings as $setting)
                 <tr>
-
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $setting->name }}</td>
                     <td>{{ $setting->value }}</td>
+                    <td>
+                        <a href="{{ route('admin.settings.edit', $setting->id) }}" class="btn-sm btn-info">Edit</a>
+                    </td>
 
-                    {{-- <td>
+                </tr>
+            @endforeach
+            {{-- <tr>
+
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $setting->name }}</td>
+                    <td>{{ $setting->value }}</td> --}}
+
+            {{-- <td>
                         <a href="{{ route('chefs.show', $chef->id) }}" class="btn btn-info btn-sm"> <i class="fas fa-folder">
                             </i> Details</a>
                         <a href="{{ route('chefs.edit', $chef->id) }}" class="btn btn-warning m-1 btn-sm"><i
@@ -52,8 +63,8 @@
                         </form>
                     </td> --}}
 
-                </tr>
-            @endforeach
+            {{-- </tr>
+            @endforeach --}}
 
         </tbody>
     </table>
