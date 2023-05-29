@@ -2,13 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\ChefController;
-use App\Http\Controllers\Admin\ProductController;
+// use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingController;
 // use App\Http\Controllers\ChefController;
+use App\Http\Controllers\Admin\ChefController;
+use App\Http\Controllers\Admin\UserController;
+// use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +40,16 @@ Route::prefix('admin')->middleware(['auth', 'IsAdmin'])->group(function () {
             Route::post('/update/{user}', 'update')->name('update');
             Route::get('/edit/{user}', 'edit')->name('edit');
             Route::delete('/delete/{user}', 'destroy')->name('destroy');
+        });
 
+        Route::controller(SettingController::class)->prefix('settings')->name('settings.')->group(function () {
+
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::post('/update/{user}', 'update')->name('update');
+            Route::get('/edit/{user}', 'edit')->name('edit');
+            Route::delete('/delete/{user}', 'destroy')->name('destroy');
         });
 
         Route::post('login', [LoginController::class, 'logout'])->name('logout');
